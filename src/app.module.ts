@@ -25,17 +25,24 @@ import { UserRepository } from './repositories/user.repository';
         enableWAL: false,
         autoLoadEntities: true,
         namingStrategy: new SnakeNamingStrategy(),
-        logging: true,
+        // logging: true,
         synchronize: true,
       }),
-      dataSourceFactory(options) {
+      async dataSourceFactory(options) {
         if (!options) {
           throw new Error('Invalid options passed');
         }
 
-        return Promise.resolve(
-          addTransactionalDataSource(new DataSource(options)),
+        const dataSource = await new DataSource(options).initialize();
+        const rows = await dataSource.query<Array<{ foreign_keys: number }>>(
+          'PRAGMA foreign_keys',
         );
+        console.log(
+          '[startup] foreign_keys =',
+          rows[0]?.foreign_keys ? 'ON!' : 'OFF',
+        );
+
+        return addTransactionalDataSource(dataSource);
       },
     }),
     TypeOrmModule.forFeature([User, Post, Comment]),
