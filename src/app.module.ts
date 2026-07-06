@@ -15,6 +15,7 @@ import { User } from './entities/user.entity';
 import { CommentRepository } from './repositories/comment.repository';
 import { PostRepository } from './repositories/post.repository';
 import { UserRepository } from './repositories/user.repository';
+import { BackupModule } from './backup/backup.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { UserRepository } from './repositories/user.repository';
       },
     }),
     TypeOrmModule.forFeature([User, Post, Comment]),
+    BackupModule,
   ],
   controllers: [
     AppController,
