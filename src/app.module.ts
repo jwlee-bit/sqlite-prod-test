@@ -5,6 +5,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { addTransactionalDataSource } from 'typeorm-transactional';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { BackupModule } from './backup/backup.module';
 import { CommentController } from './controllers/comment.controller';
 import { DiagnosticsController } from './controllers/diagnostics.controller';
 import { PostController } from './controllers/post.controller';
@@ -12,11 +13,10 @@ import { UserController } from './controllers/user.controller';
 import { Comment } from './entities/comment.entity';
 import { Post } from './entities/post.entity';
 import { User } from './entities/user.entity';
+import { ModuleResolverModule } from './module-resolver/module-resolver.module';
 import { CommentRepository } from './repositories/comment.repository';
 import { PostRepository } from './repositories/post.repository';
 import { UserRepository } from './repositories/user.repository';
-import { BackupModule } from './backup/backup.module';
-import { ModuleResolverModule } from './module-resolver/module-resolver.module';
 
 @Module({
   imports: [
@@ -53,8 +53,8 @@ import { ModuleResolverModule } from './module-resolver/module-resolver.module';
   ],
   controllers: [
     AppController,
-    UserController,
     PostController,
+    UserController,
     CommentController,
     DiagnosticsController,
   ],
