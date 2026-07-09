@@ -23,7 +23,7 @@ import { BackupModule } from './backup/backup.module';
       useFactory: () => ({
         type: 'better-sqlite3',
         database: 'db.sqlite',
-        enableWAL: false,
+        enableWAL: true,
         autoLoadEntities: true,
         namingStrategy: new SnakeNamingStrategy(),
         // logging: true,
