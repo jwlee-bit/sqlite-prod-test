@@ -16,6 +16,7 @@ import { CommentRepository } from './repositories/comment.repository';
 import { PostRepository } from './repositories/post.repository';
 import { UserRepository } from './repositories/user.repository';
 import { BackupModule } from './backup/backup.module';
+import { ModuleResolverModule } from './module-resolver/module-resolver.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { BackupModule } from './backup/backup.module';
     }),
     TypeOrmModule.forFeature([User, Post, Comment]),
     BackupModule,
+    ModuleResolverModule,
   ],
   controllers: [
     AppController,
